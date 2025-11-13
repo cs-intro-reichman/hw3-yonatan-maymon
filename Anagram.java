@@ -28,22 +28,63 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		// Replace the following statement with your code
-		return false;
+		str1 = removeSpaces(preProcess(str1));
+		str2 = removeSpaces(preProcess(str2));
+		if (str1.length() != str2.length()) {
+			return false;
+		}
+		if (str1.equals(str2)) {
+			return true;
+		}
+		boolean found = false;
+		for (int i = 0; i < str1.length(); i++){
+			for(int j = 0; j < str2.length(); j ++){
+				if (str1.charAt(i) == str2.charAt(j)) {
+					found = true;
+					str2 = str2.substring(0, j) + str2.substring(j + 1,str2.length());
+				}
+			}
+			if (!found) {
+				break;
+			}
+		}
+		return found;
 	}
 	   
 	// Returns a preprocessed version of the given string: all the letter characters are converted
 	// to lower-case, and all the other characters are deleted, except for spaces, which are left
 	// as is. For example, the string "What? No way!" becomes "whatnoway"
 	public static String preProcess(String str) {
-		// Replace the following statement with your code
-		return "";
+		String newStr = "";
+		for(int i = 0; i < str.length(); i ++){
+			if ((Character.isLetter(str.charAt(i))) || (str.charAt(i) == ' ')) {
+				newStr += str.charAt(i);
+			}
+		}
+		newStr = newStr.toLowerCase();
+		return newStr;
 	} 
 	   
 	// Returns a random anagram of the given string. The random anagram consists of the same
 	// characters as the given string, re-arranged in a random order. 
 	public static String randomAnagram(String str) {
-		// Replace the following statement with your code
-		return "";
+		int lenght = str.length();
+		String anagram = "";
+		for(int i = 0; i < lenght; i ++){
+			int index = (int) (Math.random() * str.length());
+			anagram += str.charAt(index);
+			str = str.substring(0, index) + str.substring(index + 1, str.length());
+		}
+		return anagram;
+	}
+
+	public static String removeSpaces(String str) {
+		String newStr = "";
+		for(int i = 0; i < str.length(); i++){
+			if (str.charAt(i) != ' ') {
+				newStr += str.charAt(i);
+			}
+		}
+		return newStr;
 	}
 }
