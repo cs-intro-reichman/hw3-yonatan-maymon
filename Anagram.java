@@ -28,8 +28,8 @@ public class Anagram {
 
 	// Returns true if the two given strings are anagrams, false otherwise.
 	public static boolean isAnagram(String str1, String str2) {
-		str1 = removeSpaces(preProcess(str1));
-		str2 = removeSpaces(preProcess(str2));
+		str1 = preProcess(str1);
+		str2 = preProcess(str2);
 		if (str1.length() != str2.length()) {
 			return false;
 		}
@@ -57,7 +57,7 @@ public class Anagram {
 	public static String preProcess(String str) {
 		String newStr = "";
 		for(int i = 0; i < str.length(); i ++){
-			if ((Character.isLetter(str.charAt(i))) || (str.charAt(i) == ' ')) {
+			if ((Character.isLetter(str.charAt(i)))) {
 				newStr += str.charAt(i);
 			}
 		}
@@ -76,15 +76,5 @@ public class Anagram {
 			str = str.substring(0, index) + str.substring(index + 1, str.length());
 		}
 		return anagram;
-	}
-
-	public static String removeSpaces(String str) {
-		String newStr = "";
-		for(int i = 0; i < str.length(); i++){
-			if (str.charAt(i) != ' ') {
-				newStr += str.charAt(i);
-			}
-		}
-		return newStr;
 	}
 }
